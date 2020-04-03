@@ -1,0 +1,39 @@
+import org.gradle.internal.os.OperatingSystem
+
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'com.syntech'
+version '0.0.1-SNAPSHOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+compileJava.options.encoding = 'UTF-8'
+
+application {
+    mainClassName = 'com.syntech.distcomp.lab41.Main'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.syntech.distcomp.lab41.Main'
+    }
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+run {
+    if (OperatingSystem.current() == OperatingSystem.MAC_OS) {
+        jvmArgs "-XstartOnFirstThread"
+    }
+}
